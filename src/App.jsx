@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <div>
-        <h1>Shalom World</h1>
+        <h1>Shalom World!</h1>
         <h2>This is a react project deployed on Vercel</h2>
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
