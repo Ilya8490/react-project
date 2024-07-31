@@ -9,7 +9,7 @@ function App() {
   const [city, setCity] = useState('');
 
   const fetchWeather = async (city) => {
-    const API_KEY = 'YOUR_API_KEY';
+    const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
     const data = await response.json();
     setWeatherData(data);
