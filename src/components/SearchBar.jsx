@@ -1,4 +1,4 @@
-// src/components/SearchBar.js
+// src/components/SearchBar.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -11,6 +11,11 @@ function SearchBar({ setCity, fetchWeather }) {
     setInput(value);
     if (value.length > 2) {
       const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+      if (!API_KEY) {
+        console.error('API key is missing');
+        return;
+      }
+
       try {
         console.log(`Fetching city suggestions for ${value}`);
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/find?q=${value}&type=like&sort=population&cnt=5&appid=${API_KEY}`);
@@ -39,6 +44,7 @@ function SearchBar({ setCity, fetchWeather }) {
         value={input}
         onChange={handleInputChange}
         placeholder="Enter city"
+        id="city-input" // Added id for accessibility
       />
       <button onClick={() => handleSelect(input)}>Search</button>
       {suggestions.length > 0 && (

@@ -1,4 +1,4 @@
-// src/App.js
+// src/App.jsx
 import React, { useState } from 'react';
 import SearchBar from './components/SearchBar';
 import WeatherDisplay from './components/WeatherDisplay';
@@ -10,6 +10,11 @@ function App() {
 
   const fetchWeather = async (city) => {
     const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+    if (!API_KEY) {
+      console.error('API key is missing');
+      return;
+    }
+
     try {
       console.log(`Fetching weather data for ${city}`);
       const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
