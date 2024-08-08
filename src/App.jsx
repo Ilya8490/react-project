@@ -10,9 +10,21 @@ function App() {
 
   const fetchWeather = async (city) => {
     const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
-    const data = await response.json();
-    setWeatherData(data);
+    try {
+      console.log(`Fetching weather data for ${city}`);
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+      const data = await response.json();
+      if (response.ok) {
+        console.log('Weather data:', data);
+        setWeatherData(data);
+      } else {
+        console.error('Error fetching weather data:', data);
+        setWeatherData(null);
+      }
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+      setWeatherData(null);
+    }
   };
 
   return (
