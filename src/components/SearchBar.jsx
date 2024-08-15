@@ -9,6 +9,7 @@ function SearchBar({ setCity, fetchWeather }) {
   const handleInputChange = async (e) => {
     const value = e.target.value;
     setInput(value);
+    setCity(value);
     if (value.length > 2) {
       const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
       if (!API_KEY) {
@@ -33,7 +34,6 @@ function SearchBar({ setCity, fetchWeather }) {
   const handleSelect = (cityName) => {
     setInput(cityName);
     setCity(cityName);
-    fetchWeather(cityName);
     setSuggestions([]);
   };
 

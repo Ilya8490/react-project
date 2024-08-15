@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
 import WeatherDisplay from './components/WeatherDisplay';
 import './App.css';
@@ -9,7 +9,7 @@ function App() {
   const [city, setCity] = useState('');
 
   const fetchWeather = async (city) => {
-    const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+    const API_KEY = import.meta.env.VITE_REACT_APP_WEATHER_API_KEY;
     if (!API_KEY) {
       console.error('API key is missing');
       return;
@@ -32,9 +32,15 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (city) {
+      fetchWeather(city);
+    }
+  }, [city]);
+
   return (
     <div className="App">
-      <SearchBar setCity={setCity} fetchWeather={fetchWeather} />
+      <SearchBar setCity={setCity} />
       {weatherData && <WeatherDisplay weatherData={weatherData} />}
     </div>
   );
